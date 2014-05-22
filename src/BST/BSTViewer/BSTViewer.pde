@@ -66,3 +66,15 @@ void branch(float h) {
     popMatrix();
   }
 }
+
+void keyPressed() {
+  int keyIndex = -1;
+  if (key >= '0' && key <= '9') {
+    //Insert the number
+  } 
+  if (keyIndex == -1) {
+    // If it's not a letter key remove
+  } else { 
+    //Do nothing...
+  }
+}
