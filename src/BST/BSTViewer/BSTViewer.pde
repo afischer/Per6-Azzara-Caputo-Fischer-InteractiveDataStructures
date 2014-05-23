@@ -1,19 +1,22 @@
+import java.io.*;
+import java.util.*;
+
 float theta;   
 int numNodes;
 PFont font;  
+Tree BST = new Tree();
 
 void setup() {
   size(640, 360);
   font = loadFont("../../../assets/ArialMT-16.vlw");
   textFont(font);
   textAlign(CENTER);
-
 }
 
 void draw() {
   background(0); //Color!
 
-  int firstData = 1; //eventually need this to draw from a BST
+  int firstData = BST.root.getData(); //eventually need this to draw from a BST
 
 
   frameRate(30);
@@ -24,43 +27,42 @@ void draw() {
   //Convert it to radians
   theta = radians(a);
   // Start the tree from the bottom of the screen
-  translate(width/2,-20);
+  translate(width/2, -20);
   //rotate it to the top
   rotate(PI);
 
   // put the first node's data at the end
   rotate(PI);
-  text(""+firstData,0,75); 
+  text(""+firstData, 0, 75); 
   rotate(PI);
   fill(255);
   // Move to the end of that line
-  translate(0,-80);
+  translate(0, -80);
   // Start the recursive branching!
   branch(80);
-
 }
 
 void branch(float h) {
   int currentData = 2; //eventually need this to draw from a BST
   // Each branch will be 2/3rds the size of the previous one
   h *= 0.66;
-  
+
   // All recursive functions must have an exit condition!!!!
   // Here, ours is when the length of the branch is 6 pixels or less
   if (h > 6) {
     pushMatrix();    // Save the current state of transformation (i.e. where are we now)
     rotate(theta);   // Rotate by theta
     line(0, 0, 0, -h);  // Draw the branch
-    text(""+currentData,0,-h-5); //put in the current data on right
+    text(""+currentData, 0, -h-5); //put in the current data on right
     translate(0, -h-20); // Move to the end of the branch
     branch(h);       // Ok, now call branch to draw two new branches!!
     popMatrix();     // Whenever we get back here, we "pop" in order to restore the previous matrix state
-    
+
     // Repeat the same thing, only branch off to the "left" this time!
     pushMatrix();
     rotate(-theta);
     line(0, 0, 0, -h);
-    text(""+currentData,0,-h-5); //put in the current data
+    text(""+currentData, 0, -h-5); //put in the current data
     translate(0, -h-20);
     branch(h);
     popMatrix();
@@ -68,13 +70,105 @@ void branch(float h) {
 }
 
 void keyPressed() {
-  int keyIndex = -1;
   if (key >= '0' && key <= '9') {
-    //Insert the number
-  } 
-  if (keyIndex == -1) {
-    // If it's not a letter key remove
+    BST.insert(key);
+    println("Added " + key + " to BST!");
   } else { 
     //Do nothing...
   }
 }
+
+
+
+/////////// TREE CODE! //////////
+
+
+
+public class Tree {
+  private class Leaf {
+    int data;
+    Leaf leftLeaf, rightLeaf;
+    public Leaf(int d) {
+      this.data = d;
+      leftLeaf = null;
+      rightLeaf = null;
+    }
+    public String toString() {
+      return ""+data;
+    }
+    public void setData(int d) {
+      data = d;
+    }
+    public int getData() {
+      return data;
+    }
+    public void setLeft(Leaf l) {
+      leftLeaf = l;
+    }
+    public void setRight(Leaf r) {
+      rightLeaf = r;
+    }
+    public Leaf getLeft() {
+      return leftLeaf;
+    }
+    public Leaf getRight() {
+      return rightLeaf;
+    }
+  }
+  private Leaf root;
+
+  public Tree() {
+    Scanner input = new Scanner(System.in);
+    System.out.print("Please enter integer for root: ");
+    root = new Leaf(input.nextInt());
+  }
+
+  public boolean insert(int d) {
+    Leaf x = new Leaf(d);
+    if (root == null) {
+      root = x;
+      return true;
+    }
+    boolean inPlace = false;
+    Leaf current = root;
+    while (!inPlace) {
+      int i = current.getData();
+      if (d<i) {
+        if (current.getLeft()==null) {
+          current.setLeft(x);
+          inPlace = true;
+        } else {
+          current = current.getLeft();
+        }
+      } else if (d>i) {
+        if (current.getRight()==null) {
+          current.setRight(x);
+          inPlace = true;
+        } else {
+          current = current.getRight();
+        }
+      } else {
+        break;
+      }
+    }
+    return inPlace;
+  }
+
+
+  public Leaf find(int target) {
+    Leaf current = root;               
+    while (current.getData () != target)        
+    {
+      if (target < current.getData()) {         
+        current = current.getLeft();
+      } else {                          
+        current = current.getRight();
+      }
+      if (current == null) {            
+        return null;
+      }
+    }
+    return current;
+  }
+}
+
