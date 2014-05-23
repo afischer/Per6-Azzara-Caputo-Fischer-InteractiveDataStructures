@@ -118,9 +118,23 @@ public class Tree {
   private Leaf root;
 
   public Tree() {
-    Scanner input = new Scanner(System.in);
-    System.out.print("Please enter integer for root: ");
-    root = new Leaf(input.nextInt());
+    // Variable to store text currently being typed
+    int typing = "";
+
+    // Variable to store saved text when return is hit
+    int saved = "";
+    // If the return key is pressed, save the String and clear it
+    if (key == '\n' ) {
+      saved = typing;
+      // A String can be cleared by setting it equal to ""
+      typing = "";
+    } else {
+      // Otherwise, concatenate the String
+      // Each character typed by the user is added to the end of the String variable.
+      typing = typing + key;
+    }
+    
+    root = new Leaf((Integer)saved);
   }
 
   public boolean insert(int d) {
