@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import javax.swing.*;
 
 float theta;   
 int numNodes;
@@ -118,23 +119,20 @@ public class Tree {
   private Leaf root;
 
   public Tree() {
-    // Variable to store text currently being typed
-    int typing = "";
-
-    // Variable to store saved text when return is hit
-    int saved = "";
-    // If the return key is pressed, save the String and clear it
-    if (key == '\n' ) {
-      saved = typing;
-      // A String can be cleared by setting it equal to ""
-      typing = "";
-    } else {
-      // Otherwise, concatenate the String
-      // Each character typed by the user is added to the end of the String variable.
-      typing = typing + key;
+    int op1;
+    try { 
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    } 
+    catch (Exception e) { 
+      e.printStackTrace();
+    } 
+    String preset="Root Number";
+    String op1s = JOptionPane.showInputDialog(frame, "What number would you like the root to be?", preset);
+    if (op1s != null) {
+      op1=Integer.parseInt(op1s);
     }
-    
-    root = new Leaf((Integer)saved);
+
+    root = new Leaf(Integer.parseInt(op1s));
   }
 
   public boolean insert(int d) {
