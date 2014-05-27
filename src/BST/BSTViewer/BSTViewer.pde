@@ -8,7 +8,7 @@ PFont font;
 Tree BST = new Tree();
 
 void setup() {
-  size(640, 360);
+  size(700, 500);
   font = loadFont("../../../assets/ArialMT-16.vlw");
   textFont(font);
   textAlign(CENTER);
@@ -16,9 +16,7 @@ void setup() {
 
 void draw() {
   background(0); //Color!
-
   int firstData = BST.root.getData(); //eventually need this to draw from a BST
-
 
   frameRate(30);
   stroke(255);
@@ -86,37 +84,19 @@ void keyPressed() {
 
 
 public class Tree {
-  private class Leaf {
-    int data;
-    Leaf leftLeaf, rightLeaf;
-    public Leaf(int d) {
-      this.data = d;
-      leftLeaf = null;
-      rightLeaf = null;
+  private class TreeNode extends Node {
+    TreeNode left, right;
+    public TreeNode(int d) {
+      super(d);
+      left = null;
+      right = null;
     }
-    public String toString() {
-      return ""+data;
-    }
-    public void setData(int d) {
-      data = d;
-    }
-    public int getData() {
-      return data;
-    }
-    public void setLeft(Leaf l) {
-      leftLeaf = l;
-    }
-    public void setRight(Leaf r) {
-      rightLeaf = r;
-    }
-    public Leaf getLeft() {
-      return leftLeaf;
-    }
-    public Leaf getRight() {
-      return rightLeaf;
-    }
+    public void setLeft(TreeNode l) {left = l;}
+    public void setRight(TreeNode r) {right = r;}
+    public TreeNode getLeft() {return left;}
+    public TreeNode getRight() {return right;}
   }
-  private Leaf root;
+  private TreeNode root;
 
   public Tree() {
     int op1;
@@ -132,17 +112,18 @@ public class Tree {
       op1=Integer.parseInt(op1s);
     }
 
-    root = new Leaf(Integer.parseInt(op1s));
+    root = new TreeNode(Integer.parseInt(op1s));
+    root.set
   }
 
   public boolean insert(int d) {
-    Leaf x = new Leaf(d);
+    TreeNode x = new TreeNode(d);
     if (root == null) {
       root = x;
       return true;
     }
     boolean inPlace = false;
-    Leaf current = root;
+    TreeNode current = root;
     while (!inPlace) {
       int i = current.getData();
       if (d<i) {
@@ -167,8 +148,8 @@ public class Tree {
   }
 
 
-  public Leaf find(int target) {
-    Leaf current = root;               
+  public TreeNode find(int target) {
+    TreeNode current = root;               
     while (current.getData () != target)        
     {
       if (target < current.getData()) {         
@@ -182,5 +163,24 @@ public class Tree {
     }
     return current;
   }
+  
+  
+  public String toString(){
+        return toString(root);
+    }
+
+  public String toString(Leaf r){
+  String result = "";
+  if (r == null ||( r.getLeft()==null && r.getRight()==null)){
+      return "";
+  }
+  else{
+      result += (r.getLeft()!=null ? r.getLeft().getData()+"<" : "")+r.getData()+(r.getRight()!=null ? ">"+r.getRight().getData() : "")+"\n";
+      result+=toString(r.getLeft());
+      result+=toString(r.getRight());
+  }
+  return result;
+    }
+
 }
 
