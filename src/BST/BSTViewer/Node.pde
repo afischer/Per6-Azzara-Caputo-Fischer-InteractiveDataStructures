@@ -5,7 +5,7 @@ public class Node{
   public void drawNode(){
     ellipse(xcor, ycor, 30, 30);
     fill(NColor);
-    text(data, xcor, ycor);
+    text(data, xcor, ycor+5);
     fill(255);
   }
   

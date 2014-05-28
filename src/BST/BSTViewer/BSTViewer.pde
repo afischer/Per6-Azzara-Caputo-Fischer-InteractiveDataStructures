@@ -181,44 +181,48 @@ public class Tree {
   
   
 void drawTree(TreeNode r){
-  float theta = PI/4;
+  float theta = PI/4, h = 50;
   if (r.equals(BST.root)){
-  // Start the tree from the bottom of the screen
-  translate(width/2, 40);
-  //rotate it to the top
-  rotate(PI);
-  // put the first node's data at the end
-  rotate(PI);
-  BST.root.setNodeXY(0,75);
-  BST.root.drawNode();
-  rotate(PI);
-  fill(255);
-  // Move to the end of that line
-  translate(0, -80);
-  }
-    float h = 50;
+    // Start the tree from the bottom of the screen
+    translate(width/2, 40);
+    //rotate it to the top
+    rotate(PI);
+    // put the first node's data at the end
+    rotate(PI);
+    BST.root.setNodeXY(0,75);
+    BST.root.drawNode();
+    rotate(PI);
+    fill(255);
+    // Move to the end of that line
+    translate(0, -80);
+  }else{
+    if (r.getRight() != null) {
     pushMatrix();    // Save the current state of transformation (i.e. where are we now)
-    rotate(theta);   // Rotate by theta
+    rotate(-theta);   // Rotate by theta
     line(0, 0, 0, -h);  // Draw the branch
     strokeWeight(4);
-    r.setNodeXY(0, -h-5); //put in the current data on right
-    r.setNodeColor(color(52, 172, 175));
-    r.drawNode();
+    r.getRight().setNodeXY(0, -h-5); //put in the current data on right
+    r.getRight().setNodeColor(color(52, 172, 175));
+    r.getRight().drawNode();
     translate(0, -h-20); // Move to the end of the branch
-    if (r.getRight() != null) {drawTree(r.getRight());}      // Ok, now call branch to draw two new branches!!
+    drawTree(r.getRight());     // Ok, now call branch to draw two new branches!!
     popMatrix();
+    }
     
     // Repeat the same thing, only branch off to the left this time!
+    if (r.getLeft() != null) {
     pushMatrix();
-    rotate(-theta);
+    rotate(theta);
     line(0, 0, 0, -h);
     strokeWeight(4);
-    r.setNodeXY(0, -h-5); //put in the current data on left
-    r.setNodeColor(color(52, 172, 175));
-    r.drawNode();
+    r.getLeft().setNodeXY(0, -h-5); //put in the current data on left
+    r.getLeft().setNodeColor(color(52, 172, 175));
+    r.getLeft().drawNode();
     translate(0, -h-20);
-    if (r.getLeft() != null) {drawTree(r.getLeft());}
+    drawTree(r.getLeft());
     popMatrix();
+    }
+  }
 }
   
   public String toString(){
