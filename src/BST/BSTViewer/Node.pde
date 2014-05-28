@@ -1,8 +1,12 @@
 public class Node{
-  private int data, NColor, xcor, ycor;
+  private int data; 
+  private float xcor, ycor;
+  private color NColor;
   public void drawNode(){
-    ellipse(xcor, ycor, 50, 50);
+    ellipse(xcor, ycor, 30, 30);
     fill(NColor);
+    text(data, xcor, ycor);
+    fill(255);
   }
   
   public Node(int data){
@@ -11,11 +15,11 @@ public class Node{
   public String toString() {return ""+data;}
   public void setData(int d) {data = d;}
   public int getData() {return data;}
-  public void setNodeXY(int x, int y){
+  public void setNodeXY(float x, float y){
     xcor = x;
     ycor = y;
   }
-  public void setNodeColor(int c){NColor = c;}
+  public void setNodeColor(color c){NColor = c;}
   
     
 }
