@@ -197,32 +197,27 @@ void drawTree(TreeNode r){
     translate(0, -80);
   }else{
     if (r.getRight() != null) {
-    pushMatrix();    // Save the current state of transformation (i.e. where are we now)
-    rotate(-theta);   // Rotate by theta
-    line(0, 0, 0, -h);  // Draw the branch
-    strokeWeight(4);
-    r.getRight().setNodeXY(0, -h-5); //put in the current data on right
-    r.getRight().setNodeColor(color(52, 172, 175));
-    r.getRight().drawNode();
-    translate(0, -h-20); // Move to the end of the branch
-    drawTree(r.getRight());     // Ok, now call branch to draw two new branches!!
-    popMatrix();
+    addBranch(r.getRight(),-theta,h);
     }
     
     // Repeat the same thing, only branch off to the left this time!
     if (r.getLeft() != null) {
-    pushMatrix();
-    rotate(theta);
-    line(0, 0, 0, -h);
-    strokeWeight(4);
-    r.getLeft().setNodeXY(0, -h-5); //put in the current data on left
-    r.getLeft().setNodeColor(color(52, 172, 175));
-    r.getLeft().drawNode();
-    translate(0, -h-20);
-    drawTree(r.getLeft());
-    popMatrix();
+    addBranch(r.getLeft(),theta,h);
     }
   }
+}
+
+void addBranch(TreeNode r, float x, float h){
+    pushMatrix(); // Save the current state of transformation (i.e. where are we now)
+    rotate(x); //rotate by angle
+    line(0, 0, 0, -h); // Draw the branch
+    strokeWeight(4);
+    r.setNodeXY(0, -h-5); //put in the current data
+    r.setNodeColor(color(52, 172, 175));
+    r.drawNode();
+    translate(0, -h-20); // Move to the end of the branch
+    drawTree(r);
+    popMatrix();
 }
   
   public String toString(){
