@@ -181,7 +181,7 @@ public class Tree {
   
   
 void drawTree(TreeNode r){
-  float theta = PI/4, h = 50;
+  float theta = PI/4;
   if (r.equals(BST.root)){
     // Start the tree from the bottom of the screen
     translate(width/2, 40);
@@ -195,16 +195,17 @@ void drawTree(TreeNode r){
     fill(255);
     // Move to the end of that line
     translate(0, -80);
-  }else{
+  }
+    
+    float h = 50;
     if (r.getRight() != null) {
-    addBranch(r.getRight(),-theta,h);
+      addBranch(r.getRight(),-theta,h);
     }
     
     // Repeat the same thing, only branch off to the left this time!
     if (r.getLeft() != null) {
-    addBranch(r.getLeft(),theta,h);
+      addBranch(r.getLeft(),theta,h);
     }
-  }
 }
 
 void addBranch(TreeNode r, float x, float h){
