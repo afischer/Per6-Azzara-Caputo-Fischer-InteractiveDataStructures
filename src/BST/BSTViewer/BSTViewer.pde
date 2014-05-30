@@ -25,14 +25,14 @@ void drawTree() {
 
 
 
-void keyPressed() {
-  if (key >= '0' && key <= '9') {
-    BST.insert(key);
-    println("Added " + key + " to BST!");
-  } else { 
-    //Do nothing...
-  }
-}
+//void keyPressed() {
+//  if (key >= '0' && key <= '9') {
+//    BST.insert(key);
+//    println("Added " + key + " to BST!");
+//  } else { 
+//    //Do nothing...
+//  }
+//}
 
 
 
@@ -77,7 +77,7 @@ public class Tree {
     int n = JOptionPane.showOptionDialog(null, "Would you like to use a model tree or put in your own values?", 
     "Binary Search Tree", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
     null, options, options[0]); //default button title
-    if (n==0) {
+    if (n==0) { //model tree nodes :D
       int[] nodes = {
         7, 4, 5, 6, 2, 3, 1, 9, 8, 10, 11
       };
@@ -86,7 +86,7 @@ public class Tree {
       for (int i = 1; i<nodes.length; i++) {
         insert(nodes[i]);
       }
-    } else if (n==1) {
+    } else if (n==1) { // put in da values
       String preset="Node Value";
       String op1s;
       op1s = JOptionPane.showInputDialog(frame, "What number would you like the root to be?", preset);
@@ -155,7 +155,7 @@ public class Tree {
 
 
   void drawTree(TreeNode r) {
-    float theta = PI/4;
+    float theta = PI/6;
     if (r.equals(BST.root)) {
       // Start the tree from the bottom of the screen
       translate(width/2, 40);
@@ -185,6 +185,7 @@ public class Tree {
   void addBranch(TreeNode r, float x, float h) {
     pushMatrix(); // Save the current state of transformation (i.e. where are we now)
     rotate(x); //rotate by angle
+//    rotate(45);
     line(0, 0, 0, -h); // Draw the branch
     strokeWeight(4);
     r.setNodeXY(0, -h-5); //put in the current data
