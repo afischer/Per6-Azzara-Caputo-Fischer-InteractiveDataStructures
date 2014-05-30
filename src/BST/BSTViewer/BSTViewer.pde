@@ -16,10 +16,10 @@ void draw() {
   background(0); //Color!
   frameRate(30);
   stroke(255);
-  drawTree();  
+  drawTree();
 }
 
-void drawTree(){
+void drawTree() {
   BST.drawTree(BST.root);
 }
 
@@ -48,10 +48,18 @@ public class Tree {
       left = null;
       right = null;
     }
-    public void setLeft(TreeNode l) {left = l;}
-    public void setRight(TreeNode r) {right = r;}
-    public TreeNode getLeft() {return left;}
-    public TreeNode getRight() {return right;}
+    public void setLeft(TreeNode l) {
+      left = l;
+    }
+    public void setRight(TreeNode r) {
+      right = r;
+    }
+    public TreeNode getLeft() {
+      return left;
+    }
+    public TreeNode getRight() {
+      return right;
+    }
   }
   private TreeNode root;
 
@@ -63,31 +71,37 @@ public class Tree {
     catch (Exception e) { 
       e.printStackTrace();
     }
-     Object[] options = {"Model Tree", "Input your own values"};
-     int n = JOptionPane.showOptionDialog(null, "Would you like to use a model tree or put in your own values?",
-             "Binary Search Tree", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
-             null, options, options[0]); //default button title
-    if(n==0){
-      int[] nodes = {7,4,5,6,2,3,1,9,8,10,11 };
+    Object[] options = {
+      "Model Tree", "Input your own values"
+    };
+    int n = JOptionPane.showOptionDialog(null, "Would you like to use a model tree or put in your own values?", 
+    "Binary Search Tree", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
+    null, options, options[0]); //default button title
+    if (n==0) {
+      int[] nodes = {
+        7, 4, 5, 6, 2, 3, 1, 9, 8, 10, 11
+      };
       root = new TreeNode(nodes[0]);
       root.setNodeColor(color(52, 172, 175));
-      for (int i = 1; i<nodes.length; i++){insert(nodes[i]);}
-    }else if(n==1){
-    String preset="Node Value";
-    String op1s;
-    op1s = JOptionPane.showInputDialog(frame, "What number would you like the root to be?", preset);
-    if (op1s != null) {
-      op1=Integer.parseInt(op1s);
-    }
-    root = new TreeNode(Integer.parseInt(op1s));
-    root.setNodeColor(color(52, 172, 175));
-    for (int i = 0; i < 10; i++){
-    op1s = JOptionPane.showInputDialog(frame,"Add a node", preset);
-    if (op1s != null) {
-      op1=Integer.parseInt(op1s);
-    }
-    insert(Integer.parseInt(op1s));
-    }
+      for (int i = 1; i<nodes.length; i++) {
+        insert(nodes[i]);
+      }
+    } else if (n==1) {
+      String preset="Node Value";
+      String op1s;
+      op1s = JOptionPane.showInputDialog(frame, "What number would you like the root to be?", preset);
+      if (op1s != null) {
+        op1=Integer.parseInt(op1s);
+      }
+      root = new TreeNode(Integer.parseInt(op1s));
+      root.setNodeColor(color(52, 172, 175));
+      for (int i = 0; i < 10; i++) {
+        op1s = JOptionPane.showInputDialog(frame, "Add a node", preset);
+        if (op1s != null) {
+          op1=Integer.parseInt(op1s);
+        }
+        insert(Integer.parseInt(op1s));
+      }
     }
   }
 
@@ -129,7 +143,7 @@ public class Tree {
     {
       if (target < current.getData()) {         
         current = current.getLeft();
-      }else{                          
+      } else {                          
         current = current.getRight();
       }
       if (current == null) {            
@@ -138,37 +152,37 @@ public class Tree {
     }
     return current;
   }
-  
-  
-void drawTree(TreeNode r){
-  float theta = PI/4;
-  if (r.equals(BST.root)){
-    // Start the tree from the bottom of the screen
-    translate(width/2, 40);
-    //rotate it to the top
-    rotate(PI);
-    // put the first node's data at the end
-    rotate(PI);
-    BST.root.setNodeXY(0,75);
-    BST.root.drawNode();
-    rotate(PI);
-    fill(255);
-    // Move to the end of that line
-    translate(0, -80);
-  }
-    
+
+
+  void drawTree(TreeNode r) {
+    float theta = PI/4;
+    if (r.equals(BST.root)) {
+      // Start the tree from the bottom of the screen
+      translate(width/2, 40);
+      //rotate it to the top
+      rotate(PI);
+      // put the first node's data at the end
+      rotate(PI);
+      BST.root.setNodeXY(0, 75);
+      BST.root.drawNode();
+      rotate(PI);
+      fill(255);
+      // Move to the end of that line
+      translate(0, -80);
+    }
+
     float h = 50;
     if (r.getRight() != null) {
-      addBranch(r.getRight(),-theta,h);
+      addBranch(r.getRight(), -theta, h);
     }
-    
+
     // Repeat the same thing, only branch off to the left this time!
     if (r.getLeft() != null) {
-      addBranch(r.getLeft(),theta,h);
+      addBranch(r.getLeft(), theta, h);
     }
-}
+  }
 
-void addBranch(TreeNode r, float x, float h){
+  void addBranch(TreeNode r, float x, float h) {
     pushMatrix(); // Save the current state of transformation (i.e. where are we now)
     rotate(x); //rotate by angle
     line(0, 0, 0, -h); // Draw the branch
@@ -179,24 +193,22 @@ void addBranch(TreeNode r, float x, float h){
     translate(0, -h-20); // Move to the end of the branch
     drawTree(r);
     popMatrix();
-}
-  
-  public String toString(){
-        return toString(root);
-    }
-
-  public String toString(TreeNode r){
-  String result = "";
-  if (r == null ||( r.getLeft()==null && r.getRight()==null)){
-      return "";
   }
-  else{
+
+  public String toString() {
+    return toString(root);
+  }
+
+  public String toString(TreeNode r) {
+    String result = "";
+    if (r == null ||( r.getLeft()==null && r.getRight()==null)) {
+      return "";
+    } else {
       result+=(r.getLeft()!=null ? r.getLeft().getData()+"<" : "")+r.getData()+(r.getRight()!=null ? ">"+r.getRight().getData() : "")+"\n";
       result+=toString(r.getLeft());
       result+=toString(r.getRight());
-  }
-  return result;
     }
-
+    return result;
+  }
 }
 
