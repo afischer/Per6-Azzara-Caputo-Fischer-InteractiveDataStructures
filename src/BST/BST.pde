@@ -7,7 +7,7 @@ Tree BST = new Tree();
 
 void setup() {
   size(700, 500);
-  font = loadFont("../../../assets/ArialMT-16.vlw");
+  font = loadFont("../../assets/ArialMT-16.vlw");
   textFont(font);
   textAlign(CENTER);
 }
@@ -17,6 +17,21 @@ void draw() {
   frameRate(30);
   stroke(255);
   drawTree();
+
+  if (keyPressed) { //if they want to enter a new node
+    if (key == RETURN || key == ENTER) { //if they press enter
+      String op1s;
+      int op1;
+      String preset="Node Value";
+      op1s = JOptionPane.showInputDialog(frame, "Add a node", preset); //make a frame asking to add node
+      if (op1s != null) { //if they put something in
+        op1=Integer.parseInt(op1s);
+      }
+      BST.insert(Integer.parseInt(op1s));
+      pushMatrix();
+      popMatrix();
+    }
+  }
 }
 
 void drawTree() {
@@ -61,7 +76,11 @@ public class Tree {
       return right;
     }
   }
+
   private TreeNode root;
+
+  boolean firstTime = true;
+
 
   public Tree() {
     int op1;
@@ -81,6 +100,7 @@ public class Tree {
       int[] nodes = {
         7, 4, 5, 6, 2, 3, 1, 9, 8, 10, 11
       };
+      firstTime = false;
       root = new TreeNode(nodes[0]);
       root.setNodeColor(color(52, 172, 175));
       for (int i = 1; i<nodes.length; i++) {
@@ -93,14 +113,17 @@ public class Tree {
       if (op1s != null) {
         op1=Integer.parseInt(op1s);
       }
-      root = new TreeNode(Integer.parseInt(op1s));
-      root.setNodeColor(color(52, 172, 175));
-      for (int i = 0; i < 10; i++) {
-        op1s = JOptionPane.showInputDialog(frame, "Add a node", preset);
-        if (op1s != null) {
-          op1=Integer.parseInt(op1s);
+      if (firstTime == true) {
+        root = new TreeNode(Integer.parseInt(op1s));
+        root.setNodeColor(color(52, 172, 175));
+        for (int i = 0; i < 10; i++) {
+          op1s = JOptionPane.showInputDialog(frame, "Add a node", preset);
+          if (op1s != null) {
+            op1=Integer.parseInt(op1s);
+          }
+          insert(Integer.parseInt(op1s));
+          firstTime = false;
         }
-        insert(Integer.parseInt(op1s));
       }
     }
   }
@@ -185,11 +208,11 @@ public class Tree {
   void addBranch(TreeNode r, float x, float h) {
     pushMatrix(); // Save the current state of transformation (i.e. where are we now)
     rotate(x); //rotate by angle
-//    rotate(45);
+    //    rotate(45);
     line(0, 0, 0, -h); // Draw the branch
-    strokeWeight(4);
+    strokeWeight(3);
     r.setNodeXY(0, -h-5); //put in the current data
-    r.setNodeColor(color(52, 172, 175));
+    r.setNodeColor(color(0, 0, 0));
     r.drawNode();
     translate(0, -h-20); // Move to the end of the branch
     drawTree(r);
