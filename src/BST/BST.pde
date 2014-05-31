@@ -24,10 +24,17 @@ void draw() {
       int op1;
       String preset="Node Value";
       op1s = JOptionPane.showInputDialog(frame, "Add a node", preset); //make a frame asking to add node
+      try {
       if (op1s != null) { //if they put something in
         op1=Integer.parseInt(op1s);
       }
-      BST.insert(Integer.parseInt(op1s));
+      
+        BST.insert(Integer.parseInt(op1s));
+      } 
+      catch (Exception NumberFormatException) {
+        System.out.println("Dumb user don't know what a number is.");
+      }
+
       pushMatrix();
       popMatrix();
     }
@@ -84,13 +91,13 @@ public class Tree {
 
   public Tree() {
     int op1;
-    try { 
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    } 
-    catch (Exception e) { 
-      e.printStackTrace();
-    }
-    Object[] options = {
+    //    try { 
+    //      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    //    } 
+    //    catch (Exception e) { 
+    //      e.printStackTrace();
+    //    }
+    Object[] options = {      
       "Model Tree", "Input your own values"
     };
     int n = JOptionPane.showOptionDialog(null, "Would you like to use a model tree or put in your own values?", 
@@ -98,7 +105,7 @@ public class Tree {
     null, options, options[0]); //default button title
     if (n==0) { //model tree nodes :D
       int[] nodes = {
-        7, 4, 5, 6, 2, 3, 1, 9, 8, 10, 11
+        7, 4, 5, 6, 2, 3, 1, 9, 8, 10, 11, 33
       };
       firstTime = false;
       root = new TreeNode(nodes[0]);
@@ -106,7 +113,7 @@ public class Tree {
       for (int i = 1; i<nodes.length; i++) {
         insert(nodes[i]);
       }
-    } else if (n==1) { // put in da values
+    } else if (n==1) { // put in da values yo self!
       String preset="Node Value";
       String op1s;
       op1s = JOptionPane.showInputDialog(frame, "What number would you like the root to be?", preset);
@@ -117,29 +124,29 @@ public class Tree {
         root = new TreeNode(Integer.parseInt(op1s));
         root.setNodeColor(color(52, 172, 175));
         for (int i = 0; i < 2; i++) {
-          op1s = JOptionPane.showInputDialog(frame, "Add a node", preset);
+          op1s = JOptionPane.showInputDialog(frame, "Add node #" + i+1, preset);
           if (op1s != null) {
             op1=Integer.parseInt(op1s);
           }
           insert(Integer.parseInt(op1s));
-          
+          firstTime = false;
         }
-        firstTime = false;
       }
     }
   }
 
   public boolean insert(int d) {
+    firstTime = false;
     TreeNode x = new TreeNode(d);
-    if (root == null) {
+    if (root == null) { //If we got no root, make one
       root = x;
       return true;
     }
-    boolean inPlace = false;
-    TreeNode current = root;
+    boolean inPlace = false; //our stop condition
+    TreeNode current = root; //moving through the tree like a sloth on roids
     while (!inPlace) {
       int i = current.getData();
-      if (d<i) {
+      if (d<i) { //
         if (current.getLeft()==null) {
           current.setLeft(x);
           inPlace = true;
@@ -153,8 +160,9 @@ public class Tree {
         } else {
           current = current.getRight();
         }
-      } else {
-        break;
+      } else { //If they are equal
+        current.incrementCount();
+        return true;
       }
     }
     return inPlace;
@@ -220,20 +228,20 @@ public class Tree {
     popMatrix();
   }
 
-  public String toString() {
-    return toString(root);
-  }
+  //  public String toString() {
+  //    return toString(root);
+  //  }
 
-  public String toString(TreeNode r) {
-    String result = "";
-    if (r == null ||( r.getLeft()==null && r.getRight()==null)) {
-      return "";
-    } else {
-      result+=(r.getLeft()!=null ? r.getLeft().getData()+"<" : "")+r.getData()+(r.getRight()!=null ? ">"+r.getRight().getData() : "")+"\n";
-      result+=toString(r.getLeft());
-      result+=toString(r.getRight());
-    }
-    return result;
-  }
+  //  public String toString(TreeNode r) {
+  //    String result = "";
+  //    if (r == null ||( r.getLeft()==null && r.getRight()==null)) {
+  //      return "";
+  //    } else {
+  //      result+=(r.getLeft()!=null ? r.getLeft().getData()+"<" : "")+r.getData()+(r.getRight()!=null ? ">"+r.getRight().getData() : "")+"\n";
+  //      result+=toString(r.getLeft());
+  //      result+=toString(r.getRight());
+  //    }
+  //    return result;
+  //  }
 }
 
