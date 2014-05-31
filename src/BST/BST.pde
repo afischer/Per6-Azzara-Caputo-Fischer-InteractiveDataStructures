@@ -19,7 +19,7 @@ void draw() {
   drawTree();
 
   if (keyPressed) { //if they want to enter a new node
-    if (key == RETURN || key == ENTER) { //if they press enter
+    if (key == ' ') { //if they press SPACEBAR
       String op1s;
       int op1;
       String preset="Node Value";
@@ -116,14 +116,15 @@ public class Tree {
       if (firstTime == true) {
         root = new TreeNode(Integer.parseInt(op1s));
         root.setNodeColor(color(52, 172, 175));
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
           op1s = JOptionPane.showInputDialog(frame, "Add a node", preset);
           if (op1s != null) {
             op1=Integer.parseInt(op1s);
           }
           insert(Integer.parseInt(op1s));
-          firstTime = false;
+          
         }
+        firstTime = false;
       }
     }
   }
