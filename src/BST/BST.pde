@@ -47,20 +47,7 @@ void drawTree() {
 
 
 
-//void keyPressed() {
-//  if (key >= '0' && key <= '9') {
-//    BST.insert(key);
-//    println("Added " + key + " to BST!");
-//  } else { 
-//    //Do nothing...
-//  }
-//}
-
-
-
 /////////// TREE CODE! //////////
-
-
 
 public class Tree {
   private class TreeNode extends Node {
@@ -91,12 +78,6 @@ public class Tree {
 
   public Tree() {
     int op1;
-    //    try { 
-    //      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    //    } 
-    //    catch (Exception e) { 
-    //      e.printStackTrace();
-    //    }
     Object[] options = {      
       "Model Tree", "Input your own values"
     };
@@ -227,21 +208,5 @@ public class Tree {
     drawTree(r);
     popMatrix();
   }
-
-  //  public String toString() {
-  //    return toString(root);
-  //  }
-
-  //  public String toString(TreeNode r) {
-  //    String result = "";
-  //    if (r == null ||( r.getLeft()==null && r.getRight()==null)) {
-  //      return "";
-  //    } else {
-  //      result+=(r.getLeft()!=null ? r.getLeft().getData()+"<" : "")+r.getData()+(r.getRight()!=null ? ">"+r.getRight().getData() : "")+"\n";
-  //      result+=toString(r.getLeft());
-  //      result+=toString(r.getRight());
-  //    }
-  //    return result;
-  //  }
 }
 
