@@ -12,32 +12,48 @@ void setup() {
   textAlign(CENTER);
 }
 
+
 void draw() {
   background(0); //Color!
   frameRate(30);
   stroke(255);
-  drawTree();
+  drawTree(); 
+  boolean inAdder = false;
 
-  if (keyPressed) { //if they want to enter a new node
+  if (keyPressed && !inAdder) { //if they want to enter a new node
+    inAdder = true;
+    System.out.println("in adder status: " + inAdder);
     if (key == ' ') { //if they press SPACEBAR
       String op1s;
       int op1;
       String preset="Node Value";
       op1s = JOptionPane.showInputDialog(frame, "Add a node", preset); //make a frame asking to add node
       try {
-      if (op1s != null) { //if they put something in
-        op1=Integer.parseInt(op1s);
-      }
-      
+        if (op1s != null) { //if they put something in
+          op1=Integer.parseInt(op1s);
+          inAdder = false;
+          System.out.println("in adder status: " + inAdder);
+        }
+
         BST.insert(Integer.parseInt(op1s));
-      } 
+        System.out.println("added to tree.");
+        inAdder = false;
+        System.out.println("in adder status: " + inAdder);
+
+      }
       catch (Exception NumberFormatException) {
         System.out.println("Dumb user don't know what a number is.");
+        System.out.println("in adder status: " + inAdder);
       }
+      
 
       pushMatrix();
       popMatrix();
+      inAdder = false; 
+      System.out.println("in adder status: " + inAdder);
+
     }
+    
   }
 }
 
@@ -105,7 +121,7 @@ public class Tree {
         root = new TreeNode(Integer.parseInt(op1s));
         root.setNodeColor(color(52, 172, 175));
         for (int i = 0; i < 2; i++) {
-          op1s = JOptionPane.showInputDialog(frame, "Add node #" + i+1, preset);
+          op1s = JOptionPane.showInputDialog(frame, "Add node #" + i++, preset);
           if (op1s != null) {
             op1=Integer.parseInt(op1s);
           }
