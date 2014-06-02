@@ -13,7 +13,7 @@ public class Node<E>{
     this.data = data;
   }
   public String toString() {return ""+data;}
-  public void setData(<E> d) {data = d;}
+  public void setData(E d) {data = d;}
   public int getData() {return data;}
   public void setNodeXY(float x, float y){
     xcor = x;
