@@ -43,7 +43,7 @@ void keyReleased() { //if they want to enter a new node
 }
 
 void drawTree() {
-  BST.drawTree(BST.root);
+  BST.drawTree(BST.root,1);
 }
 
 

@@ -1,5 +1,3 @@
-/////////// TREE CODE! //////////
-
 public class Tree {
   private class TreeNode extends Node {
     TreeNode left, right;
@@ -25,7 +23,6 @@ public class Tree {
   private TreeNode root;
 
   boolean firstTime = true;
-
 
   public Tree() {
     int op1;
@@ -118,7 +115,7 @@ public class Tree {
   }
 
 
-  void drawTree(TreeNode r) {
+  void drawTree(TreeNode r, int j) {
     float theta = PI/6;
     if (r.equals(BST.root)) {
       // Start the tree from the bottom of the screen
@@ -137,16 +134,17 @@ public class Tree {
 
     float h = 50;
     if (r.getRight() != null) {
-      addBranch(r.getRight(), -theta, h);
+      addBranch(r.getRight(), -theta, h, j);
     }
 
     // Repeat the same thing, only branch off to the left this time!
     if (r.getLeft() != null) {
-      addBranch(r.getLeft(), theta, h);
+      addBranch(r.getLeft(), theta, h, j);
     }
   }
 
-  void addBranch(TreeNode r, float x, float h) {
+  void addBranch(TreeNode r, float x, float h, int j) {
+    int z = (j>6) ?  6-(j%6) : 6-j;
     pushMatrix(); // Save the current state of transformation (i.e. where are we now)
     rotate(x); //rotate by angle
     //    rotate(45);
@@ -154,9 +152,10 @@ public class Tree {
     strokeWeight(3);
     r.setNodeXY(0, -h-5); //put in the current data
     r.setNodeColor(color(0, 0, 0));
+    r.setTR(z*x);
     r.drawNode();
     translate(0, -h-20); // Move to the end of the branch
-    drawTree(r);
+    drawTree(r,j+1);
     popMatrix();
   }
 }
