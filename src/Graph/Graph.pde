@@ -1,82 +1,32 @@
-float radius = 15.0;
-int X, Y;
-int nX, nY;
-int xMin = 40; // the position of the canvas from left
-int xMax = 260; // the position of the canvas from right
+import java.io.*;
+import java.util.*;
+import javax.swing.*;
 
-int yMin = 40; // the position of the canvas from top
-int yMax = 260; // the position of the canvas from bottom
-int nodeCount = 1; //increments/decrements depending on how many nodes are onscreen.
+int bs = 20;
+boolean bover = false;
+boolean locked = false;
+float bdifx = 0.0; 
+float bdify = 0.0; 
 
-Node[] nodes;
+PFont font;  
+Node n1;
+  Node n2;
+void setup() 
+{
+  size(700, 500);
+  font = loadFont("../../assets/ArialMT-16.vlw");
+  textFont(font);
+  textAlign(CENTER);
+ 
+  //n2 = new Node(222,222);
+  n1 = new Node(12,12);
+  
 
-void setup() {
-  size(640, 360);
-  nodes = new Node[nodeCount];
-  frameRate( 30 );
-  smooth();
-  fill(999);
-  X = width / 2;
-  Y = height / 2;
-  nX = X;
-  nY = Y;
-  nodes[0] = new Node(width-50, height/2, 50-height/2,12+height/2, 10, nodes);
 }
 
 void draw() {
-
-  background( 123 );
-  // Set fill-color to blue
-
-  for (int i=0; i< nodes.length; i++) {
-    nodes[i].update();
-    nodes[i].display();
-  }
-
-  fill( 0, 121, 184 );
-  // Draw circle at mouse
-  ellipse( X, Y, radius, radius );  
-  // Track circle to new destination
-  X+=(nX-X);
-  Y+=(nY-Y);  
-
-  //Need to make this drop the node.
-  if (mousePressed) {
-    stroke(255);
-  } else {
-    stroke(0);
-    strokeWeight(2);
-    smooth();
-    // Draw only if the mouse is inside the canvas and it is pressed
-    if ((mouseX > xMin) && (mouseX < xMax)) { 
-      if ((mouseY > yMin) && (mouseY < yMax)) {
-
-        if (mousePressed) {
-          line(pmouseX, pmouseY, mouseX, mouseY);
-        }
-      }
-    }
-    //pushMatrix();
-    //popMatrix();
-  }
-}
-
-// Set circle's next destination
-void mouseMoved() {
-  nX = mouseX;
-  nY = mouseY;
-}
-
-public boolean overNode(int x, int y, int width, int height) {
-  if (mouseX >= x && mouseX <= x+width && 
-    mouseY >= y && mouseY <= y+height) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-int lock(int val, int minv, int maxv) { 
-  return  min(max(val, minv), maxv);
+  background(0);
+  n1.drawNode();
+  n2.drawNode();
 }
 
