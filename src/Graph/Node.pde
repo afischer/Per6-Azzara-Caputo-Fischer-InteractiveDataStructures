@@ -1,18 +1,40 @@
 public class Node {
   private int data, count;
-  public float bx; //make random later
-  public float by; //make random later
+  protected float bx; //make random later
+  protected float by; //make random later
 
   public Node() {
     this.data = data;
     this.count = 1;
+    nodes.add(this);
+    println("added" + this);
   }
 
   public Node(int x, int y) {
     bx = x;
     by = y;
     this.count = 1;
+    nodes.add(this);
+println("added" + this);  
   }
+
+  public float getbx() {
+    return bx;
+  }
+
+  public float getby() {
+    return by;
+  }
+
+  public void setbx(float x) {
+    this.bx = x;
+  }    
+
+  public void setby(float y) {
+    this.by = y;
+  }    
+
+
 
   public void drawNode() {
 
@@ -54,30 +76,6 @@ public class Node {
 }
 
 
-void mousePressed() {
-  if (bover) { 
-    locked = true; 
-    fill(255, 255, 255);
-  } else {
-    locked = false;
-  }
-  bdifx = mouseX-bx; //object.setx to mouse x
-  bdify = mouseY-by;
-}
-
-
-void mouseDragged() {
-  if (locked) {
-    Node.bx = mouseX-bdifx; 
-    by = mouseY-bdify;
-  }
-}
-
-
-
-void mouseReleased() {
-  locked = false;
-}
 
 
 
