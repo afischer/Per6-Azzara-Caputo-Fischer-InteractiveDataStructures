@@ -5,7 +5,7 @@ public class Node<E>{
   public void drawNode(){
     ellipse(xcor, ycor, 30, 30);
     fill(NColor);
-    text((String)data, xcor, ycor+5);
+    text(""+data, xcor, ycor+5);
     fill(255);
   }
   
@@ -19,6 +19,8 @@ public class Node<E>{
     xcor = x;
     ycor = y;
   }
+  public float getX(){return xcor;}
+  public float getY(){return ycor;}
   public void setNodeColor(color c){NColor = c;}
   
 }

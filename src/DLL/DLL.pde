@@ -20,8 +20,47 @@ void draw() {
   drawDoubleLL();
 }
 
+void keyReleased() { //if they want to enter a new node
+  if (key == ' ') { //if they press SPACEBAR
+    String op1s;
+    int op1;
+    String preset="Node Value";
+    op1s = JOptionPane.showInputDialog(frame, "Add a node", preset); //make a frame asking to add node
+    try {
+      if (op1s != null) { //if they put something in
+        op1=Integer.parseInt(op1s);
+      }
+
+      DLL.insert(Integer.parseInt(op1s));
+      System.out.println("added to double linked list.");
+    }
+    catch (Exception NumberFormatException) {
+      System.out.println("Dumb user don't know what a number is.");
+    }
+    pushMatrix();
+    popMatrix();
+  }
+  if (key == 'r' ) {
+    if (DLL.getCount()>1) {
+      DLL.DLLremove();
+    }
+  }
+  if (key == 'f') {
+    if (DLL.current.getNext() != null) {
+      DLL.forward();
+      DLL.current.getPrev().setNodeColor(0);
+    }
+  }
+  if (key == 'b') {
+    if (DLL.current.getPrev() != null) {
+      DLL.back();
+      DLL.current.getNext().setNodeColor(0);
+    }
+  }
+}
+
 void drawDoubleLL() {
-  DLL.drawDoubleLL();
+  DLL.drawDLL();
 }
 
 boolean firstTime = true;
@@ -36,29 +75,20 @@ void runDoubleLL() {
   null, options, options[0]); //default button title
   if (n==0) { //model nodes :D
     int[] nodes = {
-      7, 4, 5, 6, 2, 3, 1, 9, 8, 10, 11, 33
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
     };
     firstTime = false;
-    for (int i = 1; i<nodes.length; i++) {
+    for (int i = 0; i<nodes.length; i++) {
       DLL.insert(nodes[i]);
     }
   } else if (n==1) { // put in da values yo self!
     String preset="Node Value";
     String op1s;
-    op1s = JOptionPane.showInputDialog(frame, "What number would you like the node to be?", preset);
+    op1s = JOptionPane.showInputDialog(frame, "What number would you like the first node to be?", preset);
     if (op1s != null) {
       op1=Integer.parseInt(op1s);
     }
-    if (firstTime == true) {
-      for (int i = 0; i < 2; i++) {
-        op1s = JOptionPane.showInputDialog(frame, "Add node #" + i+1, preset);
-        if (op1s != null) {
-          op1=Integer.parseInt(op1s);
-        }
-        DLL.insert(Integer.parseInt(op1s));
-        firstTime = false;
-      }
-    }
+    DLL.insert(Integer.parseInt(op1s));
   }
 }
 

@@ -14,7 +14,6 @@ public class Node {
     textSize(14);
     translate(xcor, ycor+5);
     rotate(textRotate);
-    println("hellooo");
     popMatrix();
     fill(255);
   }
