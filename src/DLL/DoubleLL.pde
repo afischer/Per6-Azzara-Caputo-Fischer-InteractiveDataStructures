@@ -27,14 +27,36 @@ public class DoubleLL<T> {
   private int count = 0;
   public DLLNode<T> current;
 
-  public void insert(T d) {
+  public void insert(T d, boolean left) {
     DLLNode<T> n = new DLLNode<T>(d);
     if (current==null) {
       current = n;
-    } else {
-      n.setNext(current);
-      current.setPrev(n);
-      current = n;
+    }else if(left){
+      if (current.getPrev() == null){
+        current.setPrev(n);
+        n.setNext(current);
+        current = current.getPrev();
+      }else{
+        DLLNode<T> x = current.getPrev();
+        x.setNext(n);
+        n.setPrev(x);
+        n.setNext(current);
+        current.setPrev(n);
+        current = n;
+      }
+    }else{
+      if (current.getNext() == null){
+        current.setNext(n);
+        n.setPrev(current);
+        current = current.getNext();
+      }else{
+        DLLNode<T> x = current.getNext();
+        x.setPrev(n);
+        n.setNext(x);
+        n.setPrev(current);
+        current.setNext(n);
+        current = n;
+      }
     }
     count++;
   }

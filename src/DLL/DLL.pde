@@ -22,20 +22,41 @@ void draw() {
 
 void keyReleased() { //if they want to enter a new node
   if (key == ' ') { //if they press SPACEBAR
-    String op1s;
     int op1;
-    String preset="Node Value";
-    op1s = JOptionPane.showInputDialog(frame, "Add a node", preset); //make a frame asking to add node
-    try {
-      if (op1s != null) { //if they put something in
-        op1=Integer.parseInt(op1s);
+    Object[] options = {      
+      "Add Before", "Add After"
+    };
+    int n = JOptionPane.showOptionDialog(null, "Would you like to add the node before or after?", 
+    "Add Node", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
+    null, options, options[0]); //default button title
+    if (n==0) { //add node to left
+      String preset="Node Value";
+      String op1s;
+      op1s = JOptionPane.showInputDialog(frame, "What number would you like the node to be?", preset);
+      try {
+        if (op1s != null) { //if they put something in
+          op1=Integer.parseInt(op1s);
+        }
+        DLL.insert(Integer.parseInt(op1s), true);
+        System.out.println("added to double linked list.");
       }
-
-      DLL.insert(Integer.parseInt(op1s));
-      System.out.println("added to double linked list.");
-    }
-    catch (Exception NumberFormatException) {
-      System.out.println("Dumb user don't know what a number is.");
+      catch (Exception NumberFormatException) {
+        System.out.println("Dumb user don't know what a number is.");
+      }
+    } else if (n==1) { // add node to right
+      String preset="Node Value";
+      String op1s;
+      op1s = JOptionPane.showInputDialog(frame, "What number would you like the first node to be?", preset);
+      try {
+        if (op1s != null) { //if they put something in
+          op1=Integer.parseInt(op1s);
+        }
+        DLL.insert(Integer.parseInt(op1s), false);
+        System.out.println("added to double linked list.");
+      }
+      catch (Exception NumberFormatException) {
+        System.out.println("Dumb user don't know what a number is.");
+      }
     }
     pushMatrix();
     popMatrix();
@@ -79,7 +100,7 @@ void runDoubleLL() {
     };
     firstTime = false;
     for (int i = 0; i<nodes.length; i++) {
-      DLL.insert(nodes[i]);
+      DLL.insert(nodes[i],true);
     }
   } else if (n==1) { // put in da values yo self!
     String preset="Node Value";
@@ -88,7 +109,7 @@ void runDoubleLL() {
     if (op1s != null) {
       op1=Integer.parseInt(op1s);
     }
-    DLL.insert(Integer.parseInt(op1s));
+    DLL.insert(Integer.parseInt(op1s),true);
   }
 }
 
