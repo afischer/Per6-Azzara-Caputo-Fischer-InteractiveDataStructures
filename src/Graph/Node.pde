@@ -8,14 +8,19 @@ public class Node {
     this.count = 1;
     nodes.add(this);
     println("added" + this);
+    current = null;
+    closest = null;
   }
 
-  public Node(int x, int y) {
+  public Node(int x, int y, int dat) {
     bx = x;
     by = y;
     this.count = 1;
     nodes.add(this);
-println("added" + this);  
+    this.data = dat;
+    println("added" + this);
+    current = null;
+    closest = null;
   }
 
   public float getbx() {
@@ -74,8 +79,5 @@ println("added" + this);
     return data;
   }
 }
-
-
-
 
 
