@@ -6,12 +6,12 @@ PFont font;
 Heap heap = new Heap();
 
 void setup() {
-  size(800, 800);
+  size(800, 600);
   font = createFont("Comic Sans MS",16,true);
   textFont(font);
   textAlign(CENTER);
   background(20,40,100);
-  frameRate(30);
+  frameRate(10);
 }
 
 void draw(){
@@ -54,6 +54,8 @@ class Heap{
     int ycor = 30;
     int level = 1;
     int upto = 1;
+    
+    /*
     while (upto < h.length){
       int temp = level;
       while (temp > 0){
@@ -64,6 +66,34 @@ class Heap{
         temp --;
       }
       level *= 2;
+    }
+    */
+    
+    strokeWeight(4);
+    stroke(255);
+    line (400, 100, 200, 200);
+    line (400, 100, 600, 200);
+
+    drawNode(400, 100, h[1]);
+    drawNode(200, 200, h[2]);
+    drawNode(600, 200, h[3]);
+    drawNode(100, 300, h[4]);
+    drawNode(300, 300, h[5]);
+    drawNode(500, 300, h[6]);
+    drawNode(700, 300, h[7]);
+    drawNode(50, 400, h[8]);
+    drawNode(150, 400, h[9]);
+    
+  }
+  
+  public void drawBranch(int hindex, int xcor, int ycor){
+    try{
+      strokeWeight(4);
+      stroke(255);
+      
+      //drawBranch(hindex*2, xcor);
+     // drawBranch(hindex*2+1);
+    }catch(IndexOutOfBoundsException e){
     }
   }
 
