@@ -86,10 +86,15 @@ class Heap{
     
   }
   
-  public void drawBranch(int hindex, int xcor, int ycor){
+  public void drawBranch(int hindex, int xcor, int ycor, int inrow){
     try{
       strokeWeight(4);
       stroke(255);
+      //draw the line to right child
+      //draw right child
+      //draw the line to left child
+      //draw left child
+      //draw self @ xcor ycor
       
       //drawBranch(hindex*2, xcor);
      // drawBranch(hindex*2+1);
