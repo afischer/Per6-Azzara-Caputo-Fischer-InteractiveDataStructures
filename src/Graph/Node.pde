@@ -8,8 +8,8 @@ public class Node {
     this.count = 1;
     nodes.add(this);
     println("added" + this);
-    current = null;
-    closest = null;
+    //    current = null;
+    //    closest = null;
   }
 
   public Node(int x, int y, int dat) {
@@ -19,8 +19,8 @@ public class Node {
     nodes.add(this);
     this.data = dat;
     println("added" + this);
-    current = null;
-    closest = null;
+    //    current = null;
+    //    closest = null;
   }
 
   public float getbx() {
@@ -39,7 +39,13 @@ public class Node {
     this.by = y;
   }    
 
-
+  public float nodeDist() {
+    double dist;
+    dist = (Math.pow(abs(this.bx+mouseX), 2.0)-Math.pow(abs(this.by+mouseY), 2.0));
+    float distance = (float)dist; 
+    distance = sqrt(distance);
+    return distance;
+  }
 
   public void drawNode() {
 
@@ -79,5 +85,4 @@ public class Node {
     return data;
   }
 }
-
 

@@ -37,22 +37,23 @@ void draw() {
 
 Node closest;
 
-
+float smallestx;
+float smallesty;
 
 Node closestNode() {
   float xcor, ycor;
-  float smallestdist=9999;
+  float smallestDist=9999;
 
   for (Node current : nodes) {
     xcor=current.getbx();
-    ycor=current.getby();
-    float dist; ///////////////////?FIX THIS CAST TO A DOUBLE PLSSSS
-    dist = (Math.pow((xcor+mouseX),2.0)-Math.pow((ycor+mouseY),2.0));
-    double distance = dist;
-    if (sqrt(distance)<smallestdist) {
+    ycor=current.getby();    
+    print(current);
+
+    if (current.nodeDist()<smallestDist) {
       closest = current;
       smallestx = xcor;
       smallesty = ycor;
+      smallestDist = current.nodeDist();
     }
   }
   println("Closest node is " + closest);
