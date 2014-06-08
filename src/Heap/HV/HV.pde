@@ -71,6 +71,8 @@ class Heap{
     
     strokeWeight(4);
     stroke(255);
+    
+    /*
     line (400, 100, 200, 200);
     line (400, 100, 600, 200);
 
@@ -83,21 +85,26 @@ class Heap{
     drawNode(700, 300, h[7]);
     drawNode(50, 400, h[8]);
     drawNode(150, 400, h[9]);
+    */
+    
+    drawBranch(1, 400, 100);
     
   }
   
-  public void drawBranch(int hindex, int xcor, int ycor, int inrow){
+  public void drawBranch(int hindex, int xcor, int ycor){
     try{
+      int q = h[hindex];
       strokeWeight(4);
       stroke(255);
       //draw the line to right child
-      //draw right child
+      line (xcor,ycor,xcor+ 50, ycor + 50);
       //draw the line to left child
-      //draw left child
+      line (xcor,ycor,xcor- 50, ycor + 50);
       //draw self @ xcor ycor
+      drawNode(xcor,ycor,q);
       
-      //drawBranch(hindex*2, xcor);
-     // drawBranch(hindex*2+1);
+      drawBranch(hindex*2, xcor-50, ycor + 50);
+      drawBranch(hindex*2+1, xcor + 50, ycor + 50);
     }catch(IndexOutOfBoundsException e){
     }
   }
