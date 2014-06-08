@@ -7,6 +7,7 @@ boolean bover = false;
 boolean locked = false;
 float bdifx = 0.0; 
 float bdify = 0.0; 
+Node cNode;
 
 PFont font;  
 Node n1, n2, n3, n4;
@@ -19,10 +20,11 @@ void setup()
   font = loadFont("../../assets/ArialMT-16.vlw");
   textFont(font);
   textAlign(CENTER);
-  n1 = new Node(111, 111, 1);
+
   n2 = new Node(222, 222, 2);
   n3 = new Node(333, 333, 3);
   n4 = new Node(444, 444, 4);
+  n1 = new Node(111, 111, 1);
 }
 
 void draw() {
@@ -37,27 +39,25 @@ void draw() {
 
 Node closest;
 
-float smallestx;
-float smallesty;
 
-Node closestNode() {
+void closestNode() {
   float xcor, ycor;
-  float smallestDist=9999;
+  float smallestDist=9999; //THIS COULD BE THE PROBLEM
 
-  for (Node current : nodes) {
-    xcor=current.getbx();
-    ycor=current.getby();    
-    print(current);
+  if (!locked) { //IF YOU ARE DRAGGING A NODE, STOP CHECKING FOR NEW CLOSER NODES
+    for (Node current : nodes) {
+      xcor=current.getbx();
+      ycor=current.getby();    
+      //print(current);
 
-    if (current.nodeDist()<smallestDist) {
-      closest = current;
-      smallestx = xcor;
-      smallesty = ycor;
-      smallestDist = current.nodeDist();
+      if (current.nodeDist()<smallestDist) {
+        closest = current;
+        smallestDist = current.nodeDist();
+      }
     }
+    println("Closest node is " + closest);
+    cNode = closest;
   }
-  println("Closest node is " + closest);
-  return closest;
 }
 
 void mousePressed() {
@@ -67,15 +67,15 @@ void mousePressed() {
   } else {
     locked = false;
   }
-  bdifx = mouseX-closestNode().getbx(); //object.setx to mouse x
-  bdify = mouseY-closestNode().getby();
+  bdifx = mouseX-cNode.getbx(); //object.setx to mouse x
+  bdify = mouseY-cNode.getby();
 }
 
 void mouseDragged() {
   if (locked) {
-    println("Currently dragging node: " + closestNode());
-    closestNode().setbx(mouseX-bdifx); 
-    closestNode().setby(mouseY-bdify);
+    println("Currently dragging node: " + cNode);
+    cNode.setbx(mouseX-bdifx); 
+    cNode.setby(mouseY-bdify);
   }
 }
 

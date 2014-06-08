@@ -41,14 +41,16 @@ public class Node {
 
   public float nodeDist() {
     double dist;
-    dist = (Math.pow(abs(this.bx+mouseX), 2.0)-Math.pow(abs(this.by+mouseY), 2.0));
-    float distance = (float)dist; 
+    dist = (Math.pow((this.bx-mouseX), 2.0)-Math.pow((this.by-mouseY), 2.0));
+    float distance = abs((float)dist); //abs IS NEEDED YO DONT TOUCH MAH CODE YOU GREMLINS
     distance = sqrt(distance);
+    println("DISTANCE IS: " + distance);
     return distance;
   }
 
   public void drawNode() {
 
+    
     // Test if the cursor is over the box 
     if (mouseX > bx-bs && mouseX < bx+bs && 
       mouseY > by-bs && mouseY < by+bs) {
@@ -64,6 +66,10 @@ public class Node {
     }
     // Draw the node;
     ellipse(bx, by, bs, bs);
+    fill(000);
+    textSize(14);
+    text(this.getData(), this.bx, this.by+3);
+    stroke(255);
   }
 
   public Node(int data) {
