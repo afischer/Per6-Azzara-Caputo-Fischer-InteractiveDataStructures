@@ -1,3 +1,6 @@
+float bdifx = 0.0; 
+float bdify = 0.0; 
+
 public class Node {
   private int data, count;
   protected float bx; //make random later
@@ -50,7 +53,7 @@ public class Node {
 
   public void drawNode() {
 
-    
+
     // Test if the cursor is over the box 
     if (mouseX > bx-bs && mouseX < bx+bs && 
       mouseY > by-bs && mouseY < by+bs) {
@@ -58,6 +61,7 @@ public class Node {
       if (!locked) { 
         stroke(255);
         fill(023, 123, 124);
+        cNode = this;
       }
     } else {
       stroke(153);

@@ -2,16 +2,18 @@ import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
-int bs = 20;
+int bs = 25; //node size
 boolean bover = false;
+Node over;
 boolean locked = false;
-float bdifx = 0.0; 
-float bdify = 0.0; 
+
 Node cNode;
 
 PFont font;  
 Node n1, n2, n3, n4;
 ArrayList<Node> nodes = new ArrayList<Node>();
+
+
 
 void setup() 
 {
@@ -21,10 +23,10 @@ void setup()
   textFont(font);
   textAlign(CENTER);
 
+  n1 = new Node(111, 111, 1);  
   n2 = new Node(222, 222, 2);
   n3 = new Node(333, 333, 3);
   n4 = new Node(444, 444, 4);
-  n1 = new Node(111, 111, 1);
 }
 
 void draw() {
@@ -33,6 +35,7 @@ void draw() {
   for (int i=0; i!=nodes.size (); i++) {
     nodes.get(i).drawNode();
     //println("CHECKING " + i);
+    println("Closest node is " + closest);
   }
 }
 
@@ -74,8 +77,8 @@ void mousePressed() {
 void mouseDragged() {
   if (locked) {
     println("Currently dragging node: " + cNode);
-    cNode.setbx(mouseX-bdifx); 
-    cNode.setby(mouseY-bdify);
+    cNode.setbx(mouseX); 
+    cNode.setby(mouseY);
   }
 }
 
