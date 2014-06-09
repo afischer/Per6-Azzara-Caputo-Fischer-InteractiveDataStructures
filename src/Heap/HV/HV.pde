@@ -6,7 +6,7 @@ PFont font;
 Heap heap = new Heap();
 
 void setup() {
-  size(1000, 500);
+  size(1300, 800);
   font = createFont("Comic Sans MS",16,true);
   textFont(font);
   textAlign(CENTER);
@@ -32,7 +32,7 @@ void exit(){
 /////HEAP CODE/////
 
 class Heap{
-  int[]h = {9,9,8,7,6,5,4,3,2,1,5,6,8,4,2,4,5,7,8,6,5,4,8,7,6,5,4,3,2,1,5,6,8,4,2,4,5,7,8,6,5,4,8,7,6,5,4,3,2,1,5,6,8,4,2,4,5,7,8,6,5,4};
+  int[]h = {9,9,3,2,1,5,6,8,4,2,4,3,2,1,5,6,8,4,2,4,5,7,8,5,7,8,8,7,6,5,4,3,2,1,3,2,1,5,6,8,4,2,4,5,7,8,5,6,8,4,2,4,4,3,2,1,3,2,1,5,6,8,4,2,4,5,7,8,5,6,3,2,1,5,6,8,4,2,4,5,7,8,8,3,2,3,2,1,5,6,8,4,2,4,5,7,8,3,2,1,5,6,8,4,2,4,5,7,8,1,5,6,8,4,2,4,5,7,8,3,2,1,5,6,8,4,2,4,5,7,8,3,2,1,5,6,8,4,2,4,5,7,8,4,2,4,5,7,8,4,3,2,3,2,1,5,6,8,4,2,4,5,7,8,1,5,6,8,4,2,4,5,7,8,4,3,2,1,5,6,8,4,2,4,5,7,8,4,3,2,1,5,6,8,4,2,4,5,7,8,4,3,2,1,5,6,8,4,2,4,5,7,8};
   
   public Heap(){   
   }
@@ -42,10 +42,10 @@ class Heap{
   public int getMax(){ return h[1]; }
 
   public void drawNode(int xcor, int ycor, int data){
-    ellipse(xcor, ycor, 30, 30);
+    ellipse(xcor, ycor, 10, 10);
     fill(color(0));
-    textSize(14);
-    text(data, xcor, ycor+5);
+    textSize(10);
+    text(data, xcor + 1, ycor+3);
     fill(255);
   }
   
@@ -53,7 +53,7 @@ class Heap{
     strokeWeight(4);
     stroke(255);
     
-    drawBranch(1, 500, 100, 250);
+    drawBranch(1, 650, 100, 325);
     
   }
   
@@ -62,17 +62,33 @@ class Heap{
       int q = h[hindex];
       strokeWeight(4);
       stroke(255);
-      //draw the line to left child
-      line (xcor,ycor,xcor - levelbase, ycor + 50);
-      // right
-      line (xcor,ycor,xcor + levelbase, ycor + 50);
       //draw self @ xcor ycor
       drawNode(xcor,ycor,q);
       
       //left
-      drawBranch(hindex*2, xcor - levelbase, ycor + 50, levelbase/2);
+      drawBranch(hindex*2, xcor - levelbase, ycor + 50, levelbase/2, xcor, ycor);
       //right
-      drawBranch(hindex*2+1, xcor + levelbase, ycor + 50, levelbase/2);
+      drawBranch(hindex*2+1, xcor + levelbase, ycor + 50, levelbase/2, xcor, ycor);
+    }catch(IndexOutOfBoundsException e){
+    }
+  }
+  
+  public void drawBranch(int hindex, int xcor, int ycor, int levelbase, int parentx, int parenty){
+    try{
+      int q = h[hindex];
+      strokeWeight(4);
+      stroke(255);
+      line (parentx,parenty,xcor, ycor);
+      line (parentx,parenty,xcor, ycor);
+
+      drawNode(parentx,parenty,h[hindex/2]);
+      //draw self @ xcor ycor
+      drawNode(xcor,ycor,q);
+      
+      //left
+      drawBranch(hindex*2, xcor - levelbase, ycor + 50, levelbase/2, xcor, ycor);
+      //right
+      drawBranch(hindex*2+1, xcor + levelbase, ycor + 50, levelbase/2, xcor, ycor);
     }catch(IndexOutOfBoundsException e){
     }
   }
