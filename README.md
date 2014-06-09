@@ -1,7 +1,7 @@
 Interactive Data Structures
 ============
 
-HEY KIDS!! Are *you* confused about data structures? Do you feel lonely inside when you hear about linked lists? Did your last bianary search tree give you a queezy feeling? **FEAR NOT.*** Intruducing...
+HEY KIDS!! Are *you* confused about data structures? Do you feel lonely inside when you hear about linked lists? Did your last bianary search tree give you a queezy feeling? **FEAR NOT.** Intruducing...
   
 *begin fireworks...*
 
