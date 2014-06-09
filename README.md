@@ -1,7 +1,7 @@
 Interactive Data Structures
 ============
 
-HEY KIDS!! Are *you* confused about data structures? Do you feel lonely inside when you hear about linked lists? Did your last bianary search tree give you a queezy feeling? **FEAR NOT.** Intruducing...
+HEY KIDS!! Are *you* confused about data structures? Do you feel lonely inside when you hear about linked lists? Did your last bianary search tree give you a queezy feeling? **FEAR NOT.** Introducing...
   
 *begin fireworks...*
 
@@ -30,6 +30,7 @@ e   88   88  88   8 88  8 88     88  88  8 88   8 88      88
 8eee88   88  88   8 88ee8 88e8   88  88ee8 88   8 88ee 8ee88  
 ```
 ![fire](http://www.capriogroup.com/WebStuff/Images/Borders/Animated-Border-Fire.gif)
+
 *Note: No fire is as hot as [this man](http://149.89.150.100/~franco.caputo/survey/survey-1.html).*  
   
 That's right kids! NOW, you can play with your data structures! GNARLEY!
