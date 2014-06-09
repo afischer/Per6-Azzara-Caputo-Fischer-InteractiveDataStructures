@@ -10,7 +10,7 @@ void setup() {
   font = createFont("Comic Sans MS",16,true);
   textFont(font);
   textAlign(CENTER);
-  background(20,40,100);
+  background(178,34,34);
   frameRate(10);
 }
 
@@ -32,7 +32,7 @@ void exit(){
 /////HEAP CODE/////
 
 class Heap{
-  int[]h = {9,9,3,2,1,5,6,8,4,2,4,3,2,1,5,6,8,4,2,4,5,7,8,5,7,8,8,7,6,5,4,3,2,1,3,2,1,5,6,8,4,2,4,5,7,8,5,6,8,4,2,4,4,3,2,1,3,2,1,5,6,8,4,2,4,5,7,8,5,6,3,2,1,5,6,8,4,2,4,5,7,8,8,3,2,3,2,1,5,6,8,4,2,4,5,7,8,3,2,1,5,6,8,4,2,4,5,7,8,1,5,6,8,4,2,4,5,7,8,3,2,1,5,6,8,4,2,4,5,7,8,3,2,1,5,6,8,4,2,4,5,7,8,4,2,4,5,7,8,4,3,2,3,2,1,5,6,8,4,2,4,5,7,8,1,5,6,8,4,2,4,5,7,8,4,3,2,1,5,6,8,4,2,4,5,7,8,4,3,2,1,5,6,8,4,2,4,5,7,8,4,3,2,1,5,6,8,4,2,4,5,7,8};
+  int[]h = {9,9,3,2,1,5,6,8,4,2,4,3,2,1,5,6,8,4,2,4,5,7,887};
   
   public Heap(){   
   }
@@ -42,17 +42,14 @@ class Heap{
   public int getMax(){ return h[1]; }
 
   public void drawNode(int xcor, int ycor, int data){
-    ellipse(xcor, ycor, 10, 10);
+    ellipse(xcor, ycor, 15, 15);
     fill(color(0));
-    textSize(10);
+    textSize(13);
     text(data, xcor + 1, ycor+3);
     fill(255);
   }
   
   public void drawIt(){
-    strokeWeight(4);
-    stroke(255);
-    
     drawBranch(1, 650, 100, 325);
     
   }
@@ -60,7 +57,6 @@ class Heap{
   public void drawBranch(int hindex, int xcor, int ycor, int levelbase){
     try{
       int q = h[hindex];
-      strokeWeight(4);
       stroke(255);
       //draw self @ xcor ycor
       drawNode(xcor,ycor,q);
@@ -80,6 +76,8 @@ class Heap{
       stroke(255);
       line (parentx,parenty,xcor, ycor);
       line (parentx,parenty,xcor, ycor);
+      
+      strokeWeight(1);
 
       drawNode(parentx,parenty,h[hindex/2]);
       //draw self @ xcor ycor
