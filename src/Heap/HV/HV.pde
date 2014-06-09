@@ -32,7 +32,7 @@ void exit(){
 /////HEAP CODE/////
 
 class Heap{
-  int[]h = {9,9,8,7,6,5,4,3,2,1};
+  int[]h = {9,9,8,7,6,5,4,3,2,1,5,6,8,4,2,4,5,7,8,6,5,4,8,7,6,5,4,3,2,1,5,6,8,4,2,4,5,7,8,6,5,4,8,7,6,5,4,3,2,1,5,6,8,4,2,4,5,7,8,6,5,4};
   
   public Heap(){   
   }
@@ -53,26 +53,26 @@ class Heap{
     strokeWeight(4);
     stroke(255);
     
-    drawBranch(1, 500, 100);
+    drawBranch(1, 500, 100, 250);
     
   }
   
-  public void drawBranch(int hindex, int xcor, int ycor){
+  public void drawBranch(int hindex, int xcor, int ycor, int levelbase){
     try{
       int q = h[hindex];
       strokeWeight(4);
       stroke(255);
       //draw the line to left child
-      line (xcor,ycor,xcor/2, ycor + 50);
+      line (xcor,ycor,xcor - levelbase, ycor + 50);
       // right
-      line (xcor,ycor,xcor/2*3, ycor + 50);
+      line (xcor,ycor,xcor + levelbase, ycor + 50);
       //draw self @ xcor ycor
       drawNode(xcor,ycor,q);
       
       //left
-      drawBranch(hindex*2, xcor/2, ycor + 50);
+      drawBranch(hindex*2, xcor - levelbase, ycor + 50, levelbase/2);
       //right
-      drawBranch(hindex*2+1, xcor/2*3, ycor + 50);
+      drawBranch(hindex*2+1, xcor + levelbase, ycor + 50, levelbase/2);
     }catch(IndexOutOfBoundsException e){
     }
   }
