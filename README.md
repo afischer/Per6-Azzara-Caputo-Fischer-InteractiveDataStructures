@@ -43,3 +43,8 @@ Whohohoah there kiddie, slow down. You think you got what it takes to master DAT
 
   
 Want to compile from source? No need - just download each viewer individually.  
+
+
+sidenote from veronika:
+
+![sorry](http://hotcutegirlygeek.files.wordpress.com/2013/10/im-so-so-sorry-doctor.gif)
