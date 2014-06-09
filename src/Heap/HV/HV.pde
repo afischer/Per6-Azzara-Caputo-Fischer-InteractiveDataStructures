@@ -6,7 +6,7 @@ PFont font;
 Heap heap = new Heap();
 
 void setup() {
-  size(800, 600);
+  size(1000, 500);
   font = createFont("Comic Sans MS",16,true);
   textFont(font);
   textAlign(CENTER);
@@ -50,44 +50,10 @@ class Heap{
   }
   
   public void drawIt(){
-    int xcor = 800 / 2;
-    int ycor = 30;
-    int level = 1;
-    int upto = 1;
-    
-    /*
-    while (upto < h.length){
-      int temp = level;
-      while (temp > 0){
-        drawNode(xcor, ycor, h[upto]);
-        xcor *= 3;
-        ycor += 30;
-        upto ++;
-        temp --;
-      }
-      level *= 2;
-    }
-    */
-    
     strokeWeight(4);
     stroke(255);
     
-    /*
-    line (400, 100, 200, 200);
-    line (400, 100, 600, 200);
-
-    drawNode(400, 100, h[1]);
-    drawNode(200, 200, h[2]);
-    drawNode(600, 200, h[3]);
-    drawNode(100, 300, h[4]);
-    drawNode(300, 300, h[5]);
-    drawNode(500, 300, h[6]);
-    drawNode(700, 300, h[7]);
-    drawNode(50, 400, h[8]);
-    drawNode(150, 400, h[9]);
-    */
-    
-    drawBranch(1, 400, 100);
+    drawBranch(1, 500, 100);
     
   }
   
@@ -96,15 +62,17 @@ class Heap{
       int q = h[hindex];
       strokeWeight(4);
       stroke(255);
-      //draw the line to right child
-      line (xcor,ycor,xcor+ 50, ycor + 50);
       //draw the line to left child
-      line (xcor,ycor,xcor- 50, ycor + 50);
+      line (xcor,ycor,xcor/2, ycor + 50);
+      // right
+      line (xcor,ycor,xcor/2*3, ycor + 50);
       //draw self @ xcor ycor
       drawNode(xcor,ycor,q);
       
-      drawBranch(hindex*2, xcor-50, ycor + 50);
-      drawBranch(hindex*2+1, xcor + 50, ycor + 50);
+      //left
+      drawBranch(hindex*2, xcor/2, ycor + 50);
+      //right
+      drawBranch(hindex*2+1, xcor/2*3, ycor + 50);
     }catch(IndexOutOfBoundsException e){
     }
   }
