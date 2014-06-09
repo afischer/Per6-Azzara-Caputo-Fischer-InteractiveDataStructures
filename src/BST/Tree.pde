@@ -120,10 +120,6 @@ public class Tree {
     if (r.equals(BST.root)) {
       // Start the tree from the bottom of the screen
       translate(width/2, 40);
-      //rotate it to the top
-      rotate(PI);
-      // put the first node's data at the end
-      rotate(PI);
       BST.root.setNodeXY(0, 75);
       BST.root.drawNode();
       rotate(PI);
@@ -144,17 +140,18 @@ public class Tree {
   }
 
   void addBranch(TreeNode r, float x, float h, int j) {
-    int z = (j>6) ?  6-(j%6) : 6-j;
+    int z = (j>6) ? j%6 : j;
     pushMatrix(); // Save the current state of transformation (i.e. where are we now)
     rotate(x); //rotate by angle
-    //    rotate(45);
     line(0, 0, 0, -h); // Draw the branch
     strokeWeight(3);
-    r.setNodeXY(0, -h-5); //put in the current data
+    translate (0, -h);
+    r.setNodeXY(0, -5); //put in the current data
     r.setNodeColor(color(0, 0, 0));
-    r.setTR(z*x);
+    rotate(PI-(z*x));
     r.drawNode();
-    translate(0, -h-20); // Move to the end of the branch
+    rotate(-(PI-(z*x)));
+    translate(0, -15); // Move to the end of the branch
     drawTree(r,j+1);
     popMatrix();
   }
