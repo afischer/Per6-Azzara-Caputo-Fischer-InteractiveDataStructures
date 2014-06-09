@@ -7,7 +7,7 @@ Heap heap = new Heap();
 
 void setup() {
   size(1300, 700);
-  font = createFont("Comic Sans MS",60,true);
+  font = createFont("Arial",60,true);
   textFont(font);
   textAlign(CENTER);
   background(178,34,34);
