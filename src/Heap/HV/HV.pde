@@ -7,7 +7,7 @@ Heap heap = new Heap();
 
 void setup() {
   size(1300, 700);
-  font = createFont("Comic Sans MS",30,true);
+  font = createFont("Comic Sans MS",60,true);
   textFont(font);
   textAlign(CENTER);
   background(178,34,34);
@@ -29,7 +29,10 @@ void mouseClicked(){
     int r = int(random(99)) + 1;
     heap.add(r);
     heap.drawIt();
-    text("Click to add a new node.", 650, 50);
+    textSize(20);
+    text("Click to add a new node.", 650, 75);
+    textSize(30);
+    text("HEAP/MAXIMUM INTEGER PRIORITY QUEUE VISUALIZER", 650, 45);
   } else if (n==1) {
     int v;
     String preset="Node Value";
@@ -41,8 +44,13 @@ void mouseClicked(){
         background(178,34,34);
         heap.add(v);
         heap.drawIt();
-        text("Click to add a new node.", 650, 50);
+        textSize(20);
+        text("Click to add a new node.", 650, 75);
+        textSize(30);
+        text("HEAP/MAXIMUM INTEGER PRIORITY QUEUE VISUALIZER", 650, 45);
       }catch(NumberFormatException e){
+        textSize(30);
+        text("You did not input an integer. Click to try again.", 650, 675);
       }
         
     }

@@ -11,10 +11,10 @@ class Heap{
   public int getMax(){ return h[1]; }
 
   public void drawNode(int xcor, int ycor, int data){
-    ellipse(xcor, ycor, 15, 15);
+    ellipse(xcor, ycor, 25, 25);
     fill(color(0));
-    textSize(13);
-    text(data, xcor + 1, ycor+3);
+    textSize(15);
+    text(data, xcor + 1, ycor+6);
     fill(255);
   }
   
