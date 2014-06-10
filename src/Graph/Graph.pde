@@ -7,7 +7,7 @@ float[][] old = new float[count][5]; //keep old values
 float ds=2; // Set size of dot in circle center
 boolean dragging=false; // Set drag switch to false
 boolean adding=false;
-float minDist = 100;
+float minDist = 150;
 boolean needHelp = true;
 PFont font;  
 boolean groupDrag = false;
@@ -19,66 +19,12 @@ int lockedOffsetX;
 int lockedOffsetY;
 float lockedOffsetXgroup, lockedOffsetYgroup;
 
-// If user presses mouse...
-void mousePressed () {
-  startX = mouseX;
-  startY = mouseY;
-  // Look for a circle the mouse is in, then lock that circle to the mouse
-  // Loop through all circles to find which one is locked
-  for (int j=0; j< count; j++) {
-    // If the circles are close...
-    if (sq(e[j][0] - mouseX) + sq(e[j][1] - mouseY) < sq(e[j][2]/2)) {
-      // Store data showing that this circle is locked, and where in relation to the cursor it was
-      lockedCircle = j;
-      lockedOffsetX = mouseX - (int)e[j][0];
-      lockedOffsetY = mouseY - (int)e[j][1];
-      lockedOffsetXgroup = (int)e[j][0] - startX;
-      lockedOffsetYgroup = (int)e[j][1] - startY;
-      // Break out of the loop because we found our circle
-      dragging = true;
-      break;
-    }
-  }
-}
-// If user releases mouse...
-void mouseReleased() {
-  // ..user is no-longer dragging
-  dragging=false;
-}
-
-void keyPressed() {
-  if (key == 'n') { //if they press n, add a new node
-    //save locations
-    adding = true;
-    for (int i=0; i<e.length; i++) {
-      for (int j=0; j<e[i].length; j++) {
-        old[i][j]=e[i][j];
-      }
-    }
-    count++;
-    e = new float[count][5];
-    setup();
-  }
-
-  if (key == '-') { //if they press -, decrease mindist
-    minDist-=5;
-  }
-  if (key == '=' || key == '+') { //if they press +(or=) increase mindist
-    minDist+=5;
-  }
-  if (key == '?' || key == '/') { //if they press ?(or/) toggle help
-    needHelp = !needHelp;
-  }
-  /*if (key == 'g') {//if they press g, toggle groupMove.
-   groupDrag = !groupDrag;
-   }*/
-}
 
 
 // Set up canvas
 void setup() {
   frameRate(60);
-  size(500, 500);
+  size(800, 800);
   strokeWeight(1);
   for (int j=0; j< count; j++) {
     e[j][0]=random(width); // X 
@@ -99,15 +45,6 @@ void setup() {
   textAlign(LEFT);
 }
 
-void drawHelp() {
-  fill(999, 999, 999, 999);
-  text("HELPFUL HELP MENU OF HELPING", width/2-230, height/2+150);
-  text("?    Show/Hide Help", width/2-230, height/2+200-15);
-  text("n    New Node", width/2-230, height/2+200);
-  text("-     Decrease node linking distance - Currently " + minDist + " units.", width/2-230, height/2+215);
-  text("h    Increase node linking distance", width/2-230, height/2+230);
-  // text("g    Toggle GroupDrag [" + groupDrag + "]", width/2-230, height/2+245);
-}
 
 void draw() {
   background(0);
@@ -169,4 +106,72 @@ void draw() {
     //rect(e[j][0]-ds, e[j][1]-ds, ds*2, ds*2);
   }
 }
+
+void drawHelp() {
+  fill(999, 999, 999, 999);
+  text("HELPFUL HELP MENU OF HELPING", width/2-380, height/2+300);
+  text("?    Show/Hide Help", width/2-380, height/2+350-15);
+  text("n    New Node", width/2-380, height/2+350);
+  text("-     Decrease node linking distance - Currently " + minDist + " units.", width/2-380, height/2+365);
+  text("+    Increase node linking distance", width/2-380, height/2+380);
+  // text("g    Toggle GroupDrag [" + groupDrag + "]", width/2-230, height/2+245);
+}
+
+
+// If user presses mouse...
+void mousePressed () {
+  startX = mouseX;
+  startY = mouseY;
+  // Look for a circle the mouse is in, then lock that circle to the mouse
+  // Loop through all circles to find which one is locked
+  for (int j=0; j< count; j++) {
+    // If the circles are close...
+    if (sq(e[j][0] - mouseX) + sq(e[j][1] - mouseY) < sq(e[j][2]/2)) {
+      // Store data showing that this circle is locked, and where in relation to the cursor it was
+      lockedCircle = j;
+      lockedOffsetX = mouseX - (int)e[j][0];
+      lockedOffsetY = mouseY - (int)e[j][1];
+      lockedOffsetXgroup = (int)e[j][0] - startX;
+      lockedOffsetYgroup = (int)e[j][1] - startY;
+      // Break out of the loop because we found our circle
+      dragging = true;
+      break;
+    }
+  }
+}
+// If user releases mouse...
+void mouseReleased() {
+  // ..user is no-longer dragging
+  dragging=false;
+}
+
+void keyPressed() {
+  if (key == 'n') { //if they press n, add a new node
+    //save locations
+    adding = true;
+    for (int i=0; i<e.length; i++) {
+      for (int j=0; j<e[i].length; j++) {
+        old[i][j]=e[i][j];
+      }
+    }
+    count++;
+    e = new float[count][5];
+    setup();
+  }
+
+  if (key == '-') { //if they press -, decrease mindist
+    minDist-=5;
+  }
+  if (key == '=' || key == '+') { //if they press +(or=) increase mindist
+    minDist+=5;
+  }
+  if (key == '?' || key == '/') { //if they press ?(or/) toggle help
+    needHelp = !needHelp;
+  }
+  /*if (key == 'g') {//if they press g, toggle groupMove.
+   groupDrag = !groupDrag;
+   }*/
+}
+
+
 

@@ -4,9 +4,12 @@ import javax.swing.*;
 
 PFont font;  
 DoubleLL<Integer> DLL = new DoubleLL();
+boolean needHelp = true;
+
 
 void setup() {
-  size(700, 500);
+  frameRate(60);
+  size(800, 800);
   font = loadFont("../../assets/ArialMT-16.vlw");
   textFont(font);
   textAlign(CENTER);
@@ -15,16 +18,33 @@ void setup() {
 
 void draw() {
   background(0); //Color!
-  frameRate(30);
+  text("Double Linked List", width/2, 20);
+  if (needHelp) {
+    translate(0, 0);
+    drawHelp();
+  }
   stroke(255);
+
   drawDoubleLL();
+}
+
+void drawHelp() {
+  textAlign(LEFT);
+  fill(999, 999, 999, 999);
+  text("HELP MENU", width/2-390, height/2+300);
+  text("?              show/hide help", width/2-390, height/2+340-15);
+  text("space     new node", width/2-390, height/2+340);
+  text("f               move the current forward", width/2-390, height/2+355);
+  text("b              move the current backward", width/2-390, height/2+370);
+  text("r               remove the current node", width/2-390, height/2+385);
+  textAlign(CENTER);
 }
 
 void keyReleased() { //if they want to enter a new node
   if (key == ' ') { //if they press SPACEBAR
     int op1;
     Object[] options = {      
-      "Add Before", "Add After"
+      "Add After", "Add Before"
     };
     int n = JOptionPane.showOptionDialog(null, "Would you like to add the node before or after?", 
     "Add Node", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
@@ -78,6 +98,9 @@ void keyReleased() { //if they want to enter a new node
       DLL.current.getNext().setNodeColor(0);
     }
   }
+  if (key == '?' || key == '/') { //if they press ?(or/) toggle help
+    needHelp = !needHelp;
+  }
 }
 
 void drawDoubleLL() {
@@ -100,7 +123,7 @@ void runDoubleLL() {
     };
     firstTime = false;
     for (int i = 0; i<nodes.length; i++) {
-      DLL.insert(nodes[i],true);
+      DLL.insert(nodes[i], true);
     }
   } else if (n==1) { // put in da values yo self!
     String preset="Node Value";
@@ -109,7 +132,7 @@ void runDoubleLL() {
     if (op1s != null) {
       op1=Integer.parseInt(op1s);
     }
-    DLL.insert(Integer.parseInt(op1s),true);
+    DLL.insert(Integer.parseInt(op1s), true);
   }
 }
 

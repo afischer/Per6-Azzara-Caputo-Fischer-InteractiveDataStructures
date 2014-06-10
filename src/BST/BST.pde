@@ -15,6 +15,7 @@ void setup() {
 
 void draw() {
   background(0); //Color!
+  text("Binary Search Tree", width/2, 20);
   text("Press SPACE to add a node", width/2, height-20);
   frameRate(30);
   stroke(255);
